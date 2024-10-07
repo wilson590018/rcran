@@ -469,6 +469,651 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="analisis-de-datos" class="level1">
 <h1>Analisis de datos</h1>
+<section id="dbca-1" class="level2">
+<h2 class="anchored" data-anchor-id="dbca-1">DBCA</h2>
+<p>Factor 1 (riego): sequia y irrigado Factor 2 (genotipo): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 Bloques: 5</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factorial 2 x 15 with 5 blocks</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>trt<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">15</span>) <span class="co"># factorial 2x15</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>outdesign <span class="ot">&lt;-</span><span class="fu">design.ab</span>(trt, <span class="at">r=</span><span class="dv">5</span>, <span class="at">serie=</span><span class="dv">2</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>book<span class="ot">&lt;-</span>outdesign<span class="sc">$</span>book</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>book</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    plots block A  B
+1     101     1 2  1
+2     102     1 2 14
+3     103     1 1 15
+4     104     1 1  1
+5     105     1 1  4
+6     106     1 2  8
+7     107     1 2  3
+8     108     1 1  5
+9     109     1 1  7
+10    110     1 2 12
+11    111     1 1  2
+12    112     1 2 13
+13    113     1 2  5
+14    114     1 1 11
+15    115     1 1  9
+16    116     1 1 14
+17    117     1 1  3
+18    118     1 2  4
+19    119     1 1 12
+20    120     1 1  6
+21    121     1 1 13
+22    122     1 2  7
+23    123     1 2 10
+24    124     1 2 15
+25    125     1 2  9
+26    126     1 2  6
+27    127     1 2 11
+28    128     1 2  2
+29    129     1 1  8
+30    130     1 1 10
+31    131     2 1  8
+32    132     2 2 14
+33    133     2 2 12
+34    134     2 1  5
+35    135     2 1 12
+36    136     2 2 10
+37    137     2 2  2
+38    138     2 1  4
+39    139     2 1 11
+40    140     2 2 11
+41    141     2 2 15
+42    142     2 1  2
+43    143     2 1 13
+44    144     2 2  9
+45    145     2 2  3
+46    146     2 1 14
+47    147     2 2  6
+48    148     2 1  1
+49    149     2 2  8
+50    150     2 1 15
+51    151     2 2  4
+52    152     2 1  3
+53    153     2 2  5
+54    154     2 2  1
+55    155     2 1 10
+56    156     2 2 13
+57    157     2 2  7
+58    158     2 1  6
+59    159     2 1  7
+60    160     2 1  9
+61    161     3 1 11
+62    162     3 1  4
+63    163     3 1  5
+64    164     3 1 15
+65    165     3 1 10
+66    166     3 2 13
+67    167     3 2  7
+68    168     3 1  1
+69    169     3 1  7
+70    170     3 2  9
+71    171     3 1  9
+72    172     3 2  8
+73    173     3 1  6
+74    174     3 2 15
+75    175     3 1  3
+76    176     3 1  8
+77    177     3 2 14
+78    178     3 2 10
+79    179     3 2  3
+80    180     3 2  1
+81    181     3 1 14
+82    182     3 1 12
+83    183     3 2 12
+84    184     3 2  2
+85    185     3 2  5
+86    186     3 2  6
+87    187     3 1 13
+88    188     3 2  4
+89    189     3 1  2
+90    190     3 2 11
+91    191     4 1 14
+92    192     4 2 15
+93    193     4 1  3
+94    194     4 1 15
+95    195     4 2  5
+96    196     4 2  3
+97    197     4 1 11
+98    198     4 2  2
+99    199     4 2  1
+100   200     4 2 14
+101   201     4 1  9
+102   202     4 2  4
+103   203     4 1 12
+104   204     4 2 10
+105   205     4 1  7
+106   206     4 1 13
+107   207     4 2  7
+108   208     4 1 10
+109   209     4 2 12
+110   210     4 1  2
+111   211     4 1  1
+112   212     4 1  5
+113   213     4 1  6
+114   214     4 2 13
+115   215     4 2  6
+116   216     4 2 11
+117   217     4 2  9
+118   218     4 1  4
+119   219     4 2  8
+120   220     4 1  8
+121   221     5 2  9
+122   222     5 1 13
+123   223     5 2  1
+124   224     5 1  7
+125   225     5 1  9
+126   226     5 1  8
+127   227     5 2  6
+128   228     5 1 15
+129   229     5 1 10
+130   230     5 1  1
+131   231     5 1 12
+132   232     5 2 12
+133   233     5 2 11
+134   234     5 2 14
+135   235     5 1 11
+136   236     5 2 10
+137   237     5 1  5
+138   238     5 1  4
+139   239     5 2 13
+140   240     5 1  2
+141   241     5 1  3
+142   242     5 2  2
+143   243     5 2  8
+144   244     5 1 14
+145   245     5 2  4
+146   246     5 2  7
+147   247     5 2  3
+148   248     5 2 15
+149   249     5 2  5
+150   250     5 1  6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(book,<span class="dv">10</span>) <span class="co"># print of the field book</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plots block A  B
+1    101     1 2  1
+2    102     1 2 14
+3    103     1 1 15
+4    104     1 1  1
+5    105     1 1  4
+6    106     1 2  8
+7    107     1 2  3
+8    108     1 1  5
+9    109     1 1  7
+10   110     1 2 12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factorial 2 x 15 x 5 with 5 replications in completely randomized design.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>trt<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>outdesign<span class="ot">&lt;-</span><span class="fu">design.ab</span>(trt, <span class="at">r=</span><span class="dv">5</span>, <span class="at">serie=</span><span class="dv">2</span>,<span class="at">design=</span><span class="st">"crd"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>book<span class="ot">&lt;-</span>outdesign<span class="sc">$</span>book</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(book)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plots r A B C
+1    101 1 1 1 1
+2    102 1 1 2 1
+3    103 2 1 1 1
+4    104 2 1 2 1
+5    105 1 1 2 2
+6    106 1 2 1 1
+7    107 1 2 2 1
+8    108 1 2 1 2
+9    109 2 1 2 2
+10   110 1 1 1 2
+11   111 1 2 2 2
+12   112 2 2 2 2
+13   113 2 1 1 2
+14   114 3 1 2 2
+15   115 3 1 2 1
+16   116 3 1 1 2
+17   117 4 1 2 2
+18   118 2 2 1 2
+19   119 2 2 2 1
+20   120 3 1 1 1
+21   121 5 1 2 2
+22   122 4 1 1 1
+23   123 3 2 2 1
+24   124 4 2 2 1
+25   125 5 2 2 1
+26   126 2 2 1 1
+27   127 3 2 1 1
+28   128 3 2 2 2
+29   129 4 2 2 2
+30   130 3 2 1 2
+31   131 5 1 1 1
+32   132 4 2 1 1
+33   133 4 2 1 2
+34   134 4 1 1 2
+35   135 5 2 1 1
+36   136 5 2 1 2
+37   137 4 1 2 1
+38   138 5 2 2 2
+39   139 5 1 1 2
+40   140 5 1 2 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factorial 3 x 3 in latin square design.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>outdesign<span class="ot">&lt;-</span><span class="fu">design.ab</span>(trt, <span class="at">serie=</span><span class="dv">2</span>, <span class="at">design=</span><span class="st">"lsd"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>book<span class="ot">&lt;-</span>outdesign<span class="sc">$</span>book</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(book)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plots row col A B
+1    101   1   1 3 2
+2    102   1   2 2 3
+3    103   1   3 3 3
+4    104   1   4 1 1
+5    105   1   5 3 1
+6    106   1   6 1 3
+7    107   1   7 1 2
+8    108   1   8 2 1
+9    109   1   9 2 2
+10   201   2   1 2 2
+11   202   2   2 1 3
+12   203   2   3 2 3
+13   204   2   4 3 1
+14   205   2   5 2 1
+15   206   2   6 3 3
+16   207   2   7 3 2
+17   208   2   8 1 1
+18   209   2   9 1 2
+19   301   3   1 3 1
+20   302   3   2 2 2
+21   303   3   3 3 2
+22   304   3   4 3 3
+23   305   3   5 2 3
+24   306   3   6 1 2
+25   307   3   7 1 1
+26   308   3   8 1 3
+27   309   3   9 2 1
+28   401   4   1 1 1
+29   402   4   2 3 2
+30   403   4   3 1 2
+31   404   4   4 1 3
+32   405   4   5 3 3
+33   406   4   6 2 2
+34   407   4   7 2 1
+35   408   4   8 2 3
+36   409   4   9 3 1
+37   501   5   1 2 1
+38   502   5   2 1 2
+39   503   5   3 2 2
+40   504   5   4 2 3
+41   505   5   5 1 3
+42   506   5   6 3 2
+43   507   5   7 3 1
+44   508   5   8 3 3
+45   509   5   9 1 1
+46   601   6   1 1 3
+47   602   6   2 1 1
+48   603   6   3 2 1
+49   604   6   4 2 2
+50   605   6   5 1 2
+51   606   6   6 3 1
+52   607   6   7 2 3
+53   608   6   8 3 2
+54   609   6   9 3 3
+55   701   7   1 3 3
+56   702   7   2 3 1
+57   703   7   3 1 1
+58   704   7   4 1 2
+59   705   7   5 3 2
+60   706   7   6 2 1
+61   707   7   7 1 3
+62   708   7   8 2 2
+63   709   7   9 2 3
+64   801   8   1 2 3
+65   802   8   2 2 1
+66   803   8   3 3 1
+67   804   8   4 3 2
+68   805   8   5 2 2
+69   806   8   6 1 1
+70   807   8   7 3 3
+71   808   8   8 1 2
+72   809   8   9 1 3
+73   901   9   1 1 2
+74   902   9   2 3 3
+75   903   9   3 1 3
+76   904   9   4 2 1
+77   905   9   5 1 1
+78   906   9   6 2 3
+79   907   9   7 2 2
+80   908   9   8 3 1
+81   909   9   9 3 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>LA_MOLINA_2014_POTATO_WUE_FB_ <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"LA MOLINA 2014 POTATO WUE (FB).xlsx"</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sheet =</span> <span class="st">"fb"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(LA_MOLINA_2014_POTATO_WUE_FB_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> lfa <span class="sc">~</span> bloque <span class="sc">+</span> riego <span class="sc">+</span> geno <span class="sc">+</span> riego<span class="sc">*</span>geno, <span class="at">data =</span> LA_MOLINA_2014_POTATO_WUE_FB_)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: lfa
+            Df    Sum Sq   Mean Sq   F value Pr(&gt;F)    
+bloque       4   3435339    858835    1.5616 0.1892    
+riego        1 788556926 788556926 1433.7957 &lt;2e-16 ***
+geno        14 261729564  18694969   33.9922 &lt;2e-16 ***
+riego:geno  14 108147972   7724855   14.0457 &lt;2e-16 ***
+Residuals  116  63797516    549979                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="comparacion-de-medias" class="level2">
+<h2 class="anchored" data-anchor-id="comparacion-de-medias">Comparacion de medias</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> agricolae<span class="sc">::</span><span class="fu">duncan.test</span>(<span class="at">y =</span> modelo</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                             , <span class="at">trt =</span> <span class="fu">c</span>(<span class="st">"riego"</span>, <span class="st">"geno"</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>mc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$statistics
+   MSerror  Df     Mean       CV
+  549978.6 116 4806.708 15.42855
+
+$parameters
+    test     name.t ntr alpha
+  Duncan riego:geno  30  0.05
+
+$duncan
+      Table CriticalRange
+2  2.801028      928.9779
+3  2.947907      977.6910
+4  3.045555     1010.0768
+5  3.117189     1033.8343
+6  3.172876     1052.3034
+7  3.217864     1067.2239
+8  3.255217     1079.6123
+9  3.286875     1090.1118
+10 3.314137     1099.1534
+11 3.337915     1107.0395
+12 3.358871     1113.9897
+13 3.377500     1120.1683
+14 3.394183     1125.7013
+15 3.409216     1130.6870
+16 3.422835     1135.2039
+17 3.435231     1139.3152
+18 3.446561     1143.0726
+19 3.456952     1146.5191
+20 3.466514     1149.6904
+21 3.475338     1152.6169
+22 3.483500     1155.3239
+23 3.491071     1157.8346
+24 3.498115     1160.1708
+25 3.504650     1162.3382
+26 3.510752     1164.3621
+27 3.516453     1166.2529
+28 3.521778     1168.0190
+29 3.526793     1169.6820
+30 3.531442     1171.2240
+
+$means
+                   lfa        std r      se     Min      Max     Q25      Q50
+irrigado:G01  7377.892  583.61443 5 331.656 6539.86  7982.73 7038.08  7578.79
+irrigado:G02  5779.562 1127.71742 5 331.656 4631.00  7392.38 5162.74  5233.55
+irrigado:G03  5416.770   89.80871 5 331.656 5305.77  5545.69 5369.88  5412.51
+irrigado:G04  9668.932  945.94448 5 331.656 8569.08 10811.84 8867.03  9791.10
+irrigado:G05  8878.756 1235.57574 5 331.656 7205.94 10291.06 8189.67  8913.12
+irrigado:G06  7455.364 1009.33982 5 331.656 6576.65  9040.06 6857.13  6938.90
+irrigado:G07  1374.156  411.10652 5 331.656 1065.26  1989.25 1068.97  1140.05
+irrigado:G08  7286.826  282.80318 5 331.656 6998.00  7643.80 7012.74  7310.01
+irrigado:G09 10287.712 1548.81007 5 331.656 8533.54 12296.22 8924.78 10764.71
+irrigado:G10  5271.344  822.34789 5 331.656 4249.18  6164.24 4743.16  5171.21
+irrigado:G11  6854.880 1888.72290 5 331.656 3966.33  8867.09 6210.41  7225.02
+irrigado:G12  7417.258  946.24681 5 331.656 6111.43  8603.78 7164.03  7194.26
+irrigado:G13  8672.380 1015.60193 5 331.656 7180.79  9743.70 8256.98  8750.00
+irrigado:G14  8384.132 1473.21710 5 331.656 6049.52  9776.01 7895.00  8978.89
+irrigado:G15  6367.026  107.45072 5 331.656 6270.00  6522.46 6302.79  6304.88
+sequia:G01    3039.588  115.85242 5 331.656 2900.00  3203.70 2994.58  2999.66
+sequia:G02    2717.050  281.05239 5 331.656 2449.59  3063.35 2487.28  2618.85
+sequia:G03    2059.052  179.44660 5 331.656 1811.97  2274.48 1953.50  2107.76
+sequia:G04    2978.712  302.61678 5 331.656 2511.13  3263.70 2889.83  3010.27
+sequia:G05    1783.678  120.66794 5 331.656 1657.64  1967.49 1700.00  1771.80
+sequia:G06    3348.074  165.94367 5 331.656 3159.54  3550.19 3198.96  3381.68
+sequia:G07     680.734  335.90739 5 331.656  216.31  1097.98  495.83   782.10
+sequia:G08    2373.624  260.99914 5 331.656 2021.37  2697.93 2278.60  2319.71
+sequia:G09    3073.322  198.12400 5 331.656 2781.32  3238.41 2961.78  3150.00
+sequia:G10    2924.648  235.40497 5 331.656 2541.12  3136.07 2909.10  2940.95
+sequia:G11    2062.412  317.51100 5 331.656 1556.38  2301.31 1942.23  2237.88
+sequia:G12    2446.404   37.06811 5 331.656 2400.00  2487.78 2425.26  2438.98
+sequia:G13    3126.100   47.70803 5 331.656 3062.34  3191.97 3110.00  3120.00
+sequia:G14    3514.338  217.30731 5 331.656 3318.36  3811.99 3326.93  3449.76
+sequia:G15    1580.506  248.79682 5 331.656 1176.63  1814.84 1560.00  1601.06
+                  Q75
+irrigado:G01  7750.00
+irrigado:G02  6478.14
+irrigado:G03  5450.00
+irrigado:G04 10305.61
+irrigado:G05  9793.99
+irrigado:G06  7864.08
+irrigado:G07  1607.25
+irrigado:G08  7469.58
+irrigado:G09 10919.31
+irrigado:G10  6028.93
+irrigado:G11  8005.55
+irrigado:G12  8012.79
+irrigado:G13  9430.43
+irrigado:G14  9221.24
+irrigado:G15  6435.00
+sequia:G01    3100.00
+sequia:G02    2966.18
+sequia:G03    2147.55
+sequia:G04    3218.63
+sequia:G05    1821.46
+sequia:G06    3450.00
+sequia:G07     811.45
+sequia:G08    2550.51
+sequia:G09    3235.10
+sequia:G10    3096.00
+sequia:G11    2274.26
+sequia:G12    2480.00
+sequia:G13    3146.19
+sequia:G14    3664.65
+sequia:G15    1750.00
+
+$comparison
+NULL
+
+$groups
+                   lfa groups
+irrigado:G09 10287.712      a
+irrigado:G04  9668.932     ab
+irrigado:G05  8878.756     bc
+irrigado:G13  8672.380      c
+irrigado:G14  8384.132     cd
+irrigado:G06  7455.364     de
+irrigado:G12  7417.258     de
+irrigado:G01  7377.892     de
+irrigado:G08  7286.826     ef
+irrigado:G11  6854.880     ef
+irrigado:G15  6367.026     fg
+irrigado:G02  5779.562     gh
+irrigado:G03  5416.770     gh
+irrigado:G10  5271.344      h
+sequia:G14    3514.338      i
+sequia:G06    3348.074     ij
+sequia:G13    3126.100    ijk
+sequia:G09    3073.322    ijk
+sequia:G01    3039.588    ijk
+sequia:G04    2978.712    ijk
+sequia:G10    2924.648    ijk
+sequia:G02    2717.050   ijkl
+sequia:G12    2446.404  ijklm
+sequia:G08    2373.624  jklmn
+sequia:G11    2062.412   klmn
+sequia:G03    2059.052   klmn
+sequia:G05    1783.678    lmn
+sequia:G15    1580.506    mno
+irrigado:G07  1374.156     no
+sequia:G07     680.734      o
+
+attr(,"class")
+[1] "group"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 6
+ $ statistics:'data.frame': 1 obs. of  4 variables:
+  ..$ MSerror: num 549979
+  ..$ Df     : int 116
+  ..$ Mean   : num 4807
+  ..$ CV     : num 15.4
+ $ parameters:'data.frame': 1 obs. of  4 variables:
+  ..$ test  : chr "Duncan"
+  ..$ name.t: chr "riego:geno"
+  ..$ ntr   : int 30
+  ..$ alpha : num 0.05
+ $ duncan    :'data.frame': 29 obs. of  2 variables:
+  ..$ Table        : num [1:29] 2.8 2.95 3.05 3.12 3.17 ...
+  ..$ CriticalRange: num [1:29] 929 978 1010 1034 1052 ...
+ $ means     :'data.frame': 30 obs. of  9 variables:
+  ..$ lfa: num [1:30] 7378 5780 5417 9669 8879 ...
+  ..$ std: num [1:30] 583.6 1127.7 89.8 945.9 1235.6 ...
+  ..$ r  : int [1:30] 5 5 5 5 5 5 5 5 5 5 ...
+  ..$ se : num [1:30] 332 332 332 332 332 ...
+  ..$ Min: num [1:30] 6540 4631 5306 8569 7206 ...
+  ..$ Max: num [1:30] 7983 7392 5546 10812 10291 ...
+  ..$ Q25: num [1:30] 7038 5163 5370 8867 8190 ...
+  ..$ Q50: num [1:30] 7579 5234 5413 9791 8913 ...
+  ..$ Q75: num [1:30] 7750 6478 5450 10306 9794 ...
+ $ comparison: NULL
+ $ groups    :'data.frame': 30 obs. of  2 variables:
+  ..$ lfa   : num [1:30] 10288 9669 8879 8672 8384 ...
+  ..$ groups: chr [1:30] "a" "ab" "bc" "c" ...
+ - attr(*, "class")= chr "group"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to emmeans.
+Caution: You lose important information if you filter this package's results.
+See '? untidy'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: mvtnorm</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: survival</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: TH.data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Cargando paquete requerido: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Adjuntando el paquete: 'TH.data'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:MASS':
+
+    geyser</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ dplyr::select() masks MASS::select()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(modelo, <span class="sc">~</span> riego <span class="sc">|</span> geno) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>mc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      riego geno    emmean      SE  df   lower.CL  upper.CL
+1  irrigado  G01  7377.892 331.656 116 6721.00546  8034.779
+2    sequia  G01  3039.588 331.656 116 2382.70146  3696.475
+3  irrigado  G02  5779.562 331.656 116 5122.67546  6436.449
+4    sequia  G02  2717.050 331.656 116 2060.16346  3373.937
+5  irrigado  G03  5416.770 331.656 116 4759.88346  6073.657
+6    sequia  G03  2059.052 331.656 116 1402.16546  2715.939
+7  irrigado  G04  9668.932 331.656 116 9012.04546 10325.819
+8    sequia  G04  2978.712 331.656 116 2321.82546  3635.599
+9  irrigado  G05  8878.756 331.656 116 8221.86946  9535.643
+10   sequia  G05  1783.678 331.656 116 1126.79146  2440.565
+11 irrigado  G06  7455.364 331.656 116 6798.47746  8112.251
+12   sequia  G06  3348.074 331.656 116 2691.18746  4004.961
+13 irrigado  G07  1374.156 331.656 116  717.26946  2031.043
+14   sequia  G07   680.734 331.656 116   23.84746  1337.621
+15 irrigado  G08  7286.826 331.656 116 6629.93946  7943.713
+16   sequia  G08  2373.624 331.656 116 1716.73746  3030.511
+17 irrigado  G09 10287.712 331.656 116 9630.82546 10944.599
+18   sequia  G09  3073.322 331.656 116 2416.43546  3730.209
+19 irrigado  G10  5271.344 331.656 116 4614.45746  5928.231
+20   sequia  G10  2924.648 331.656 116 2267.76146  3581.535
+21 irrigado  G11  6854.880 331.656 116 6197.99346  7511.767
+22   sequia  G11  2062.412 331.656 116 1405.52546  2719.299
+23 irrigado  G12  7417.258 331.656 116 6760.37146  8074.145
+24   sequia  G12  2446.404 331.656 116 1789.51746  3103.291
+25 irrigado  G13  8672.380 331.656 116 8015.49346  9329.267
+26   sequia  G13  3126.100 331.656 116 2469.21346  3782.987
+27 irrigado  G14  8384.132 331.656 116 7727.24546  9041.019
+28   sequia  G14  3514.338 331.656 116 2857.45146  4171.225
+29 irrigado  G15  6367.026 331.656 116 5710.13946  7023.913
+30   sequia  G15  1580.506 331.656 116  923.61946  2237.393</code></pre>
+</div>
+</div>
+</section>
+<section id="grafico" class="level2">
+<h2 class="anchored" data-anchor-id="grafico">Grafico</h2>
+</section>
 </section>
 
 </main>

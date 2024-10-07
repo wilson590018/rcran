@@ -3,7 +3,7 @@
     "path": "D:/rcran/index.qmd",
     "project_path": "index.qmd",
     "type": "quarto_markdown",
-    "hash": "2067150995",
+    "hash": "1127993910",
     "contents": "",
     "dirty": false,
     "created": 1727908006643.0,
@@ -15,8 +15,8 @@
         "tempName": "Untitled2",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "201,0",
-        "scrollLine": "186",
+        "cursorPosition": "217,0",
+        "scrollLine": "214",
         "docOutlineVisible": "0",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "82:0",
@@ -24,11 +24,11 @@
         "chunk_output_type": "inline"
     },
     "folds": "",
-    "lastKnownWriteTime": 1728306653,
+    "lastKnownWriteTime": 1728307325,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1728306653656,
+    "last_content_update": 1728307325297,
     "read_only": false,
     "read_only_alternatives": []
 }

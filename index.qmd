@@ -215,28 +215,3 @@ mc
 
 
 ## Grafico
-
-```{r}
-
-library(inti)
-
-plot_smr(data = mc
-         , x = "geno"
-         , y = "emmean"
-         , group = "riego"
-         , sig = ".group"
-         , error = "SE"
-         , ylimits = c(0, 12000, 2000)
-         )
-
-
-```
-
-
-
-
-
-
-
-
-
